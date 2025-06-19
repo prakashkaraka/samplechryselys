@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pharma Forecast</title>
+</head>
+<body>
+    <h1>Pharma Forecast</h1>
+    <button onclick="loadForecast()">Get Forecast</button>
+    <pre id="forecast"></pre>
+    <button onclick="loadSimulation()">Run What-If Simulation</button>
+    <pre id="simulation"></pre>
+
+<script>
+function loadForecast() {
+    fetch('/forecast?periods=3')
+      .then(resp => resp.json())
+      .then(data => {
+          document.getElementById('forecast').textContent = JSON.stringify(data, null, 2);
+      });
+}
+function loadSimulation() {
+    fetch('/simulate?shock=0.2')
+      .then(resp => resp.json())
+      .then(data => {
+          document.getElementById('simulation').textContent = JSON.stringify(data, null, 2);
+      });
+}
+</script>
+</body>
+</html>
